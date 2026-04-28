@@ -1,0 +1,2 @@
+# ESTUDO DO DJANGO 2026 
+
