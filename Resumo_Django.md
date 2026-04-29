@@ -29,6 +29,7 @@
 9. 'python manage.py migrate'
 10. 'python manage.py createsuperuser'
 11. colocar dentro do admin.py dentro do app, o models criado para apresentar no painel adm.
+12. Ajustar as rotas em urls.py
  
 
 ## PAREI NA AULA 3 - 7,35MIN Criar tabelas e atualizar BD
