@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Usamos esta tag para herdar as partes que sempre se repetem
+ do arquivo base para o html -->
+{% extends "lista_tarefas/base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>Primeira página criada</h1>
-    <p>Estou na minha primeira página criada peloa django.</p>
-</body>
+<!-- Este conteúdo será jogado dentro do arquivo base -->
+<h1>Primeira página criada</h1>
+<p>Estou na minha primeira página criada peloa django.</p>
 
-</html>
+{% endblock content %}

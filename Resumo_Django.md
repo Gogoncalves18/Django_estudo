@@ -32,5 +32,5 @@
 12. Ajustar as rotas em urls.py
  
 
-## PAREI NA AULA 3 - 7,35MIN Criar tabelas e atualizar BD
+## PAREI NA AULA 7 - no inicio
 

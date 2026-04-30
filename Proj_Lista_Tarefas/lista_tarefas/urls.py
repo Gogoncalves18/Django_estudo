@@ -8,5 +8,7 @@ urlpatterns = [
     # funcao para quando não digitar nada após o end_url, ele encaminha
     # para a url do app lista_tarefas dentro de uma função chamada INDEX
     # e de lá eu direciono para o html desejado.
-    path('', views.index),
+    # name='index' é usado pelo o django para acionar as url sem depender
+    # de end_url, isto ajuda no deploy.
+    path('', views.index, name='index'),
 ]
