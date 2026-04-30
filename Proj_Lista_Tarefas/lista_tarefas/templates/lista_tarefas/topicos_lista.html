@@ -1,0 +1,21 @@
+<!-- Usamos esta tag para herdar as partes que sempre se repetem
+ do arquivo base para o html -->
+{% extends "lista_tarefas/base.html" %}
+
+{% block content %}
+
+<!-- Aqui vamos renderizar os dados de tarefas que tem registrado no BD,
+    porém preciso usar o conceito de UL e Li do HTML -->
+<ul>
+    <!-- Devo entrar com um for de python entre "{%" sendo que estou varrendo
+        os dados de chave e valor da view topicos -->
+    {% for topico in topicos_lista %}
+    <li> {{ topico }} </li>
+
+    <!-- Uso esta tag para o caso de não receber nenhum vlr na chave -->
+    {% empty %}
+    <li>Não há tarefas!</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

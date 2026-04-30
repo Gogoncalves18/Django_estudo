@@ -30,6 +30,7 @@
 10. 'python manage.py createsuperuser'
 11. colocar dentro do admin.py dentro do app, o models criado para apresentar no painel adm.
 12. Ajustar as rotas em urls.py
+13. Cuidar dos nomes dentro das rotas da url que irá apontar para as views
  
 
 ## PAREI NA AULA 7 - no inicio

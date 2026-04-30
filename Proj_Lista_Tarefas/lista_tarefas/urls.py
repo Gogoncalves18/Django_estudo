@@ -11,4 +11,7 @@ urlpatterns = [
     # name='index' é usado pelo o django para acionar as url sem depender
     # de end_url, isto ajuda no deploy.
     path('', views.index, name='index'),
+    # Nova url que apresentará os topicos que irei criar em views.py
+    path('topicos', views.topicos, name='topicos')
 ]
+
