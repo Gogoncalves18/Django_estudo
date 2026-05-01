@@ -1,0 +1,20 @@
+{% extends "lista_tarefas/base.html" %}
+
+{% block content %}
+<h3>Preencha as informações:</h3>
+
+<!-- com form, eu preciso apontar para página onde ele estará -->
+<form action="{% url 'novo_topico' %}" method="post">
+
+    <!-- Esta tag é obrigatória para fazer a validação interna do token -->
+    {% csrf_token %}
+
+    <!-- Aqui eu recebo a variável com todos os dados enviados pela view -->
+    {{ form.as_p }}
+
+    <button name="submit">Adicionar Tópico</button>
+
+</form>
+
+
+{% endblock content %}

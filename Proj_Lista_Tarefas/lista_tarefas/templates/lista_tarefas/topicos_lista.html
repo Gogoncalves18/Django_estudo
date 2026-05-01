@@ -6,20 +6,13 @@
 <ul>
 
     {% for topico in topicos_lista %}
-    <!-- Na lista de tópicos, é possível criar um link direcionando para o NAME 
-     dentro do arquivo urls.py, ao qual eu aponto para qual view irá fornecer os dados
-     necessários. Neste caso, desta view, eu preciso ainda dar para a URL o PARAM
-     para ele saber qual é o 'id' do pai.
-     Neste caso, a minha VAR dentro da view sub_topicos com o nome de:
-     "topico = Topicos.objects.get(id = topico_id)" tem a possibilidade de me fornecer 
-     o dado, já que ela me traz todas informações do obj pai, entre ela o "topico.id"
-     que deve entrar sem aspas, indicando que e um PARAM necessário para URL -->
     <li> <a href="{% url 'sub_topicos_tarefas' topico.id %}">{{ topico }}</a> </li>
-
-    <!-- Uso esta tag para o caso de não receber nenhum vlr na chave -->
     {% empty %}
     <li>Não há tarefas!</li>
     {% endfor %}
 </ul>
+
+<!-- Envio para rota que cairá no formulário -->
+<a href="{% url 'novo_topico' %}">Adicionar novo tópico</a>
 
 {% endblock content %}
