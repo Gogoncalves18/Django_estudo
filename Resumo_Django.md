@@ -33,5 +33,5 @@
 13. Cuidar dos nomes dentro das rotas da url que irá apontar para as views
  
 
-## PAREI NA AULA 7 - no inicio
+## PAREI NA AULA 9 - no inicio
 

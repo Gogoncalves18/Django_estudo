@@ -12,6 +12,11 @@ urlpatterns = [
     # de end_url, isto ajuda no deploy.
     path('', views.index, name='index'),
     # Nova url que apresentará os topicos que irei criar em views.py
-    path('topicos', views.topicos, name='topicos')
+    path('topicos', views.topicos, name='topicos'),
+
+    # URL para acessar subtopicos que estão ligados por uma FK com a tabela 
+    # topicos. Importante ficar claro que eu envio para view um parametro que
+    # é inserido nesta url através de "< >"
+    path('subtopicos/<topico_id>/', views.sub_topicos, name='sub_topicos_tarefas'),
 ]
 
