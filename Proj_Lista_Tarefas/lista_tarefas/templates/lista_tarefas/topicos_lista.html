@@ -1,17 +1,20 @@
-<!-- Usamos esta tag para herdar as partes que sempre se repetem
- do arquivo base para o html -->
 {% extends "lista_tarefas/base.html" %}
 
 {% block content %}
 <h3>Tarefas:</h3>
 
-<!-- Aqui vamos renderizar os dados de tarefas que tem registrado no BD,
-    porém preciso usar o conceito de UL e Li do HTML -->
 <ul>
-    <!-- Devo entrar com um for de python entre "{%" sendo que estou varrendo
-        os dados de chave e valor da view topicos -->
+
     {% for topico in topicos_lista %}
-    <li> {{ topico }} </li>
+    <!-- Na lista de tópicos, é possível criar um link direcionando para o NAME 
+     dentro do arquivo urls.py, ao qual eu aponto para qual view irá fornecer os dados
+     necessários. Neste caso, desta view, eu preciso ainda dar para a URL o PARAM
+     para ele saber qual é o 'id' do pai.
+     Neste caso, a minha VAR dentro da view sub_topicos com o nome de:
+     "topico = Topicos.objects.get(id = topico_id)" tem a possibilidade de me fornecer 
+     o dado, já que ela me traz todas informações do obj pai, entre ela o "topico.id"
+     que deve entrar sem aspas, indicando que e um PARAM necessário para URL -->
+    <li> <a href="{% url 'sub_topicos_tarefas' topico.id %}">{{ topico }}</a> </li>
 
     <!-- Uso esta tag para o caso de não receber nenhum vlr na chave -->
     {% empty %}

@@ -13,17 +13,13 @@ para dizer para o django que ele tem que abrir uma url index.html
 quando clicar, este nome index não é o nome do arquivo, mas o nome
 dado para rota dentro de urls.py no app. 
 -->
-    <a href="{% url 'index' %}">
-        <h1>Lista de Tarefas</h1>
-    </a>
+    <a href="{% url 'index' %}">Lista de Tarefas</a>
+    <a href="{% url 'topicos' %}">Ir para Tarafas</a>
 
 </header>
 
 <body>
-    <!-- No django temos o conceito do arquivo base, que é um 
- padrão usado para aproveitar um html para outro. Tudo que quisermos
- jogar para outro html devemos deixar dentro do par de chaves abaixo:
- -->
+
     {% block content %} {% endblock content %}
 
 </body>
