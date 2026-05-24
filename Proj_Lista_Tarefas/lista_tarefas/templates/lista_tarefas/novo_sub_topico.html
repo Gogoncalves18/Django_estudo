@@ -1,0 +1,18 @@
+{% extends "lista_tarefas/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'sub_topicos_tarefas' topico.id %}"> {{ topico }} </a></p>
+
+<p>Adicione novo sub-tópico:</p>
+
+<!-- Esta parte enviará, após submeter o post,para a própria page
+ do topico, para vermos as subtarefas pertecentes a tarefa PAI -->
+<form action="{% url 'novo_sub_topico' topico.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Adicionar</button>
+
+</form>
+
+{% endblock content %}

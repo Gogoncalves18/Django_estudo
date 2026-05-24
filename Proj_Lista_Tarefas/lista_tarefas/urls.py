@@ -7,5 +7,9 @@ urlpatterns = [
     path('subtopicos/<topico_id>/', views.sub_topicos, name='sub_topicos_tarefas'),
     # URL para tratar a entrada de novos tópicos através de forms.
     path('new_topico', views.novo_topico, name='novo_topico'),
+
+    # Quando direcionar para pagina do novo subtopico, faremos um parsing de 
+    # param, ao qual será o ID do topico
+    path('new_sub_topico/<topico_id>', views.new_sub_topicos, name='novo_sub_topico'),
 ]
 

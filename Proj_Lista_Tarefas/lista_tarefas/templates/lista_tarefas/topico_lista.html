@@ -2,6 +2,12 @@
 
 {% block content %}
 <h3>Tarefa - {{ topico }}</h3>
+<h3>Tarefa - {{ topico.id }}</h3>
+
+<p>
+    <a href="{% url 'novo_sub_topico' topico.id %}">Adicione uma nova SUB - Tarefa</a>
+</p>
+
 <p>Sub-Tarefas de sua tarefa:</p>
 
 <!-- Aqui vamos renderizar os dados de tarefas que tem registrado no BD,
