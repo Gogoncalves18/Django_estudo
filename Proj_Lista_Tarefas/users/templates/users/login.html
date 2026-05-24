@@ -1,0 +1,21 @@
+{% extends "lista_tarefas/base.html" %}
+
+{% block content %}
+
+<!-- Tag do django para fazer uma validação de erro no form do login -->
+{% if form.errors %}
+<p>Seu login ou senha está incorreto.</p>
+{% endif %}
+
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button name="submit">Entrar</button>
+    <!-- Este processo esconde o input na html e envia o user
+     para a página index se tudo der certo -->
+    <input type="hidden" name="next" value="{% url 'index' %}" />
+
+</form>
+
+{% endblock content %}

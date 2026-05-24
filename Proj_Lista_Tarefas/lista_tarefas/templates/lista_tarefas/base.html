@@ -8,13 +8,16 @@
 </head>
 
 <header>
-    <!-- Este {% url 'index' %} serve como cmd do python/django
-para dizer para o django que ele tem que abrir uma url index.html
-quando clicar, este nome index não é o nome do arquivo, mas o nome
-dado para rota dentro de urls.py no app. 
--->
-    <a href="{% url 'index' %}">Lista de Tarefas</a>
-    <a href="{% url 'topicos' %}">Ir para Tarafas</a>
+
+    <p>
+        <a href="{% url 'index' %}">Lista de Tarefas</a>
+        <a href="{% url 'topicos' %}">Ir para Tarefas</a>
+        {% if user.is_authenticated %}
+        Olá, {{user.username}}.
+        {% else %}
+        <a href="{% url 'login' %}">Logar em sua conta!</a>
+        {% endif %}
+    </p>
 
 </header>
 
