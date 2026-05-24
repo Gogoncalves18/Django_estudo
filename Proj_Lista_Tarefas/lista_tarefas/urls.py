@@ -11,5 +11,6 @@ urlpatterns = [
     # Quando direcionar para pagina do novo subtopico, faremos um parsing de 
     # param, ao qual será o ID do topico
     path('new_sub_topico/<topico_id>', views.new_sub_topicos, name='novo_sub_topico'),
+    path('edit_sub_topico/<sub_topico_id>', views.edit_sub_topico, name='editar_sub_topico'),
 ]
 

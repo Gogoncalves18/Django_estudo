@@ -1,0 +1,28 @@
+{% extends "lista_tarefas/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'sub_topicos_tarefas' topico_id %}">{{ sub_topico_id }}</a></p>
+
+<p>Editar o Sub-Tópico:</p>
+
+<!-- Uma coisa importante:
+(url 'editar_sub_topico') => eu vejo para onde a rota será enviada,
+sendo assim devo cuidar no url.py.
+ (sub_topico_id.id) => é o param passado para url, ele vem sempre sem
+ aspas. E é necessário cuidar: "sub_topico_id" é um objeto que contem 
+ todos os dados daquele registro no BD, e o ".id" é a coluna que contem
+ o valor deste objeto para seu ID.
+-->
+
+<form action="{% url 'editar_sub_topico' sub_topico_id.id %}" method="post">
+
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button name="submit">Salvar Sub-Tópico</button>
+
+</form>
+
+{% endblock content %}

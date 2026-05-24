@@ -10,18 +10,17 @@
 
 <p>Sub-Tarefas de sua tarefa:</p>
 
-<!-- Aqui vamos renderizar os dados de tarefas que tem registrado no BD,
-    porém preciso usar o conceito de UL e Li do HTML -->
 <ul>
-    <!-- Devo entrar com um for de python entre "{%" sendo que estou varrendo
-        os dados de chave e valor da view topicos -->
+
     {% for sub_topico in sub_topicos_do_topico %}
     <li>
         <p>{{ sub_topico.date_added }}</p>
         <p>{{ sub_topico.text_sub_topicos }}</p>
+        <p>
+            <a href="{% url 'editar_sub_topico' sub_topico.id %}">Editar Sub-Tópico</a>
+        </p>
     </li>
 
-    <!-- Uso esta tag para o caso de não receber nenhum vlr na chave -->
     {% empty %}
     <li>Não há sub-tarefas!</li>
     {% endfor %}

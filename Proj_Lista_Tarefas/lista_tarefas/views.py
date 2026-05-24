@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Topicos
+from .models import Topicos, Sub_topicos
 
 # Trago o form para a view. 
 from .forms import Topico_Form, Sub_topico
@@ -31,8 +31,8 @@ def sub_topicos(request, topico_id):
     topico = Topicos.objects.get(id = topico_id)
     sub_topicos_do_topico = topico.sub_topicos_set.order_by('-date_added')
     context = {'topico': topico, 'sub_topicos_do_topico': sub_topicos_do_topico}
-    print(context)
-    print(sub_topicos_do_topico)
+    # print(context)
+    # print(sub_topicos_do_topico)
 
     return render(request, 'lista_tarefas/topico_lista.html', context)
 
@@ -105,3 +105,33 @@ def new_sub_topicos(request, topico_id):
         
     context = {'topico': topico, 'form': form}
     return render(request, 'lista_tarefas/novo_sub_topico.html', context)
+
+
+def edit_sub_topico(request, sub_topico_id):
+    """ Edição de subtopicos que estão dentro de tópicos."""
+
+    # Busco o id da subtarefa que tenho interesse
+    sub_topico_id = Sub_topicos.objects.get(id=sub_topico_id)
+    # Busco o id da tarefa PAI que é a FK
+    topico_id = sub_topico_id.sub_topicos_id
+    print(f'============>  {topico_id}')
+
+    if request.method != 'POST':
+        # Resgato um form preenchido com os dados no BD, neste caso
+        # peguei o form dos subtopicos e com (instance=sub_topico_id)
+        # é possível trazer o texto gravado para este ID de subtopico.
+        form = Sub_topico(instance=sub_topico_id)
+
+    else:
+        # Neste caso, se quero atualizar os dados do form, a função
+        # (instance=sub_topico_id, data=request.POST) permite que:
+        # instance traga os dados e o data, repreencha os dados 
+        # ao qual estão no front e que serão enviados para o BD no mesmo
+        # id ao qual peguei em "sub_topico_id"
+        form = Sub_topico(instance=sub_topico_id, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('sub_topicos_tarefas', args=[topico_id]))
+        
+    context = {'sub_topico_id': sub_topico_id, 'topico_id': topico_id, 'form': form}
+    return render(request, 'lista_tarefas/editar_sub_topico.html', context)
