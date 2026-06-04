@@ -12,8 +12,11 @@
     <p>
         <a href="{% url 'index' %}">Lista de Tarefas</a>
         <a href="{% url 'topicos' %}">Ir para Tarefas</a>
+        <!-- Este href de logout_user server para ter um 
+         btn de fechamento da sessao do usuario.-->
         {% if user.is_authenticated %}
         Olá, {{user.username}}.
+        <a href="{% url 'logout_user' %}">Sair!</a>
         {% else %}
         <a href="{% url 'login' %}">Logar em sua conta!</a>
         {% endif %}

@@ -33,5 +33,6 @@
 13. Cuidar dos nomes dentro das rotas da url que irá apontar para as views
  
 
-## PAREI NA AULA 13 - no inicio
+## PAREI NA AULA 16 - no inicio
+https://www.youtube.com/watch?v=Wjre41OFNhs&list=PLLVddSbilcumgeyk0z6ko5U_FYPfbRO2C&index=17
 

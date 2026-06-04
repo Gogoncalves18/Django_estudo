@@ -2,10 +2,6 @@
 
 {% block content %}
 
-<!-- Tag do django para fazer uma validação de erro no form do login -->
-{% if form.errors %}
-<p>Seu login ou senha está incorreto.</p>
-{% endif %}
 
 <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
