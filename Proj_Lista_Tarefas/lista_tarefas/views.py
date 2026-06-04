@@ -1,22 +1,23 @@
 from django.shortcuts import render
 from .models import Topicos, Sub_topicos
-
-# Trago o form para a view. 
 from .forms import Topico_Form, Sub_topico
-
-# Com esta classe eu posso redirecionar a ação para qq rota.
 from django.http import HttpResponseRedirect
-
-# Com esta classe que simplifico a url main que pode mudar no deploy
-# desta forma eu posso usar apenas os names dentro do urls.py.
 from django.urls import reverse
-
+# Esta biblioteca serve para definir quais views eu
+# exijo login realizado.
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     """ Renderiza a pagina principal"""
     return render(request, 'lista_tarefas/index.html')
 
+
+# Decorador para exigir login do user para acessar a view.
+# Se ele não tiver logado, ele deverá desviar o user para
+# tela de login. Para isto é necessário configurar o settings
+# com a key "LOGIN_URL ="
+@login_required
 def topicos(request):
     """ Apresenta as tarefas principais """
     topicos_lista = Topicos.objects.order_by('date_added')
@@ -25,18 +26,21 @@ def topicos(request):
     return render(request, 'lista_tarefas/topicos_lista.html', context)
 
 
+@login_required
 def sub_topicos(request, topico_id):
     """ Listas de sub topicos ligados por FK com a tabela topicos. """
 
-    topico = Topicos.objects.get(id = topico_id)
+    topico = Topicos.objects.get(id=topico_id)
     sub_topicos_do_topico = topico.sub_topicos_set.order_by('-date_added')
-    context = {'topico': topico, 'sub_topicos_do_topico': sub_topicos_do_topico}
+    context = {'topico': topico,
+               'sub_topicos_do_topico': sub_topicos_do_topico}
     # print(context)
     # print(sub_topicos_do_topico)
 
     return render(request, 'lista_tarefas/topico_lista.html', context)
 
 
+@login_required
 def novo_topico(request):
     """ Inserção de novos tópicos no BD """
 
@@ -67,14 +71,15 @@ def novo_topico(request):
             # django (names dentro das urls), para não se perder quando trocar
             # de servidor.
             return HttpResponseRedirect(reverse('topicos'))
-    
+
     context = {'form': form}
     return render(request, 'lista_tarefas/novo_topico.html', context)
 
 
+@login_required
 def new_sub_topicos(request, topico_id):
     """ Entradas para novos subtopicos do tópico pai. """
-    topico = Topicos.objects.get(id = topico_id)
+    topico = Topicos.objects.get(id=topico_id)
     print(f'========> {topico.id}')
     if request.method != 'POST':
         # Para apresentar o mesmo formulario em branco já
@@ -99,14 +104,16 @@ def new_sub_topicos(request, topico_id):
             nova_entrada.save()
 
             # Aqui algo novo, eu redireciono a page passando um arg para ela,
-            # preenchendo o param que ela precisa para achar os sub_topicos ligados
-            # ao topico pai.
-            return HttpResponseRedirect(reverse('sub_topicos_tarefas', args=[topico.id]))
-        
+            # preenchendo o param que ela precisa para achar os sub_topicos
+            # ligados ao topico pai.
+            return HttpResponseRedirect(reverse('sub_topicos_tarefas',
+                                                args=[topico.id]))
+
     context = {'topico': topico, 'form': form}
     return render(request, 'lista_tarefas/novo_sub_topico.html', context)
 
 
+@login_required
 def edit_sub_topico(request, sub_topico_id):
     """ Edição de subtopicos que estão dentro de tópicos."""
 
@@ -131,7 +138,9 @@ def edit_sub_topico(request, sub_topico_id):
         form = Sub_topico(instance=sub_topico_id, data=request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('sub_topicos_tarefas', args=[topico_id]))
-        
-    context = {'sub_topico_id': sub_topico_id, 'topico_id': topico_id, 'form': form}
+            return HttpResponseRedirect(reverse('sub_topicos_tarefas',
+                                                args=[topico_id]))
+
+    context = {'sub_topico_id': sub_topico_id, 'topico_id': topico_id,
+               'form': form}
     return render(request, 'lista_tarefas/editar_sub_topico.html', context)
