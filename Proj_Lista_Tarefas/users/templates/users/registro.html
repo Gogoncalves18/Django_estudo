@@ -1,0 +1,17 @@
+{% extends "lista_tarefas/base.html" %}
+
+{% block content %}
+
+<!-- Lembrando que aqui em url é sempre o "name=" que esta em urls-->
+<form action="{% url 'reg_usuario' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button name="submit">Registrar</button>
+    <!-- Este processo esconde o input na html e envia o user
+     para a página index se tudo der certo -->
+    <input type="hidden" name="next" value="{% url 'index' %}" />
+
+</form>
+
+{% endblock content %}

@@ -18,6 +18,8 @@
         Olá, {{user.username}}.
         <a href="{% url 'logout_user' %}">Sair!</a>
         {% else %}
+        <!-- Lembrando que em url é o 'name=' que está dentro de urls.py-->
+        <a href="{% url 'reg_usuario' %}">Criar conta.</a>
         <a href="{% url 'login' %}">Logar em sua conta!</a>
         {% endif %}
     </p>
