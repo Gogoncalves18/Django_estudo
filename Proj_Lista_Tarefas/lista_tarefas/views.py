@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Topicos, Sub_topicos
 from .forms import Topico_Form, Sub_topico
-from django.http import HttpResponseRedirect
+# Http404 serve para levantarmos uma aviso de page nao encontrada
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 # Esta biblioteca serve para definir quais views eu
 # exijo login realizado.
@@ -20,7 +21,13 @@ def index(request):
 @login_required
 def topicos(request):
     """ Apresenta as tarefas principais """
-    topicos_lista = Topicos.objects.order_by('date_added')
+
+    # Acrescentado 'filter(owner=request.user)' para filtrar topicos que sao
+    # o usuario logado, o problema é que somente isto nao adianta. Se tivermos
+    # o endereco da url, ele consegue acessar.
+    topicos_lista = Topicos.objects.\
+        filter(owner=request.user).\
+        order_by('date_added')
 
     context = {'topicos_lista': topicos_lista}
     return render(request, 'lista_tarefas/topicos_lista.html', context)
@@ -31,13 +38,22 @@ def sub_topicos(request, topico_id):
     """ Listas de sub topicos ligados por FK com a tabela topicos. """
 
     topico = Topicos.objects.get(id=topico_id)
-    sub_topicos_do_topico = topico.sub_topicos_set.order_by('-date_added')
-    context = {'topico': topico,
-               'sub_topicos_do_topico': sub_topicos_do_topico}
-    # print(context)
-    # print(sub_topicos_do_topico)
 
-    return render(request, 'lista_tarefas/topico_lista.html', context)
+    # Esta logica serve para pegarmos a instancia que o django trouxe
+    # que possui todas as colunas da tabela e estou pegando a coluna
+    # de owner da tab e verificando contra o user que está fazendo o request,
+    # se ele for diferente eu chamo uma fx pronta do django para acusar page
+    # nao encontrada.
+    if topico.owner != request.user:
+        raise Http404
+    else:
+        sub_topicos_do_topico = topico.sub_topicos_set.order_by('-date_added')
+        context = {'topico': topico,
+                   'sub_topicos_do_topico': sub_topicos_do_topico}
+        # print(context)
+        # print(sub_topicos_do_topico)
+
+        return render(request, 'lista_tarefas/topico_lista.html', context)
 
 
 @login_required
@@ -59,17 +75,15 @@ def novo_topico(request):
         # Mas isto tudo precisa ser instanciado, aqui em 'form'.
         form = Topico_Form(request.POST)
 
-        # Faço uma validação do Django para ver se não há nada no form
-        # que fere a estrutura de dados do BD, como tipagem de dados.
         if form.is_valid():
-            # Aqui o Django injeta no BD as informações preenchidas no form.
-            form.save()
+            # Para receber os dados e nao injetar no BD ainda até
+            # colocar o owner.
+            novo_topico = form.save(commit=False)
+            # Eu adiciono aos dados o campo 'owner' que é igual ao campo
+            # no BD e instacio nele o user de request que é o ID do usuario.
+            novo_topico.owner = request.user
+            novo_topico.save()
 
-            # Como terminamos de excutar os dados, redireciono a página para
-            # rota 'topicos' para que o usuário decida o que fazer. Este método
-            # é o mais indicado pois estou usando as referências internas do
-            # django (names dentro das urls), para não se perder quando trocar
-            # de servidor.
             return HttpResponseRedirect(reverse('topicos'))
 
     context = {'form': form}
@@ -121,26 +135,31 @@ def edit_sub_topico(request, sub_topico_id):
     sub_topico_id = Sub_topicos.objects.get(id=sub_topico_id)
     # Busco o id da tarefa PAI que é a FK
     topico_id = sub_topico_id.sub_topicos_id
-    print(f'============>  {topico_id}')
 
-    if request.method != 'POST':
-        # Resgato um form preenchido com os dados no BD, neste caso
-        # peguei o form dos subtopicos e com (instance=sub_topico_id)
-        # é possível trazer o texto gravado para este ID de subtopico.
-        form = Sub_topico(instance=sub_topico_id)
-
+    if topico_id != request.user:
+        raise Http404
     else:
-        # Neste caso, se quero atualizar os dados do form, a função
-        # (instance=sub_topico_id, data=request.POST) permite que:
-        # instance traga os dados e o data, repreencha os dados 
-        # ao qual estão no front e que serão enviados para o BD no mesmo
-        # id ao qual peguei em "sub_topico_id"
-        form = Sub_topico(instance=sub_topico_id, data=request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('sub_topicos_tarefas',
-                                                args=[topico_id]))
 
-    context = {'sub_topico_id': sub_topico_id, 'topico_id': topico_id,
-               'form': form}
-    return render(request, 'lista_tarefas/editar_sub_topico.html', context)
+        print(f'============>  {topico_id}')
+
+        if request.method != 'POST':
+            # Resgato um form preenchido com os dados no BD, neste caso
+            # peguei o form dos subtopicos e com (instance=sub_topico_id)
+            # é possível trazer o texto gravado para este ID de subtopico.
+            form = Sub_topico(instance=sub_topico_id)
+
+        else:
+            # Neste caso, se quero atualizar os dados do form, a função
+            # (instance=sub_topico_id, data=request.POST) permite que:
+            # instance traga os dados e o data, repreencha os dados 
+            # ao qual estão no front e que serão enviados para o BD no mesmo
+            # id ao qual peguei em "sub_topico_id"
+            form = Sub_topico(instance=sub_topico_id, data=request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('sub_topicos_tarefas',
+                                                    args=[topico_id]))
+
+        context = {'sub_topico_id': sub_topico_id, 'topico_id': topico_id,
+                   'form': form}
+        return render(request, 'lista_tarefas/editar_sub_topico.html', context)
