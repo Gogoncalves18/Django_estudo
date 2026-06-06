@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lista_tarefas',
     'users',
+    # Apos instalar o bootstrap necessário adicionar aqui
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +122,9 @@ STATIC_URL = 'static/'
 
 # Opcao para o decorador do login_required desviar a página para tela de login
 LOGIN_URL = '/users/login'
+
+# É necessário eu apontar o uso do jquery pois o bootstrap usa recursos
+# do javascript
+BOOTSTRAP5 = {
+    'include_jquery': True,
+}

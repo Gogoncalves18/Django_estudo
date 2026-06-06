@@ -31,6 +31,7 @@
 11. colocar dentro do admin.py dentro do app, o models criado para apresentar no painel adm.
 12. Ajustar as rotas em urls.py
 13. Cuidar dos nomes dentro das rotas da url que irá apontar para as views
+14. Rodar 'pip install django-bootstrap5' para ele instalar a versao 5 do bootstrap
  
 ## Cuidados:
 ### Quando ocorre de atualizar novos campos nas tab dentro do banco. Neste caso eu precisei colocar um ID de user dentro de cada registro de topicos para que cada tópico tenha um dono:

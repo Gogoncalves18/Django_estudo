@@ -1,29 +1,53 @@
+<!-- Tag de contexto para carregar o bootstrap-->
+{% load django_bootstrap5 %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas</title>
+
+    <!-- TAG DO DJANGO PARA INSERIR O BOOTSTRAP -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
 </head>
 
 <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
-    <p>
-        <a href="{% url 'index' %}">Lista de Tarefas</a>
-        <a href="{% url 'topicos' %}">Ir para Tarefas</a>
-        <!-- Este href de logout_user server para ter um 
-         btn de fechamento da sessao do usuario.-->
-        {% if user.is_authenticated %}
-        Olá, {{user.username}}.
-        <a href="{% url 'logout_user' %}">Sair!</a>
-        {% else %}
-        <!-- Lembrando que em url é o 'name=' que está dentro de urls.py-->
-        <a href="{% url 'reg_usuario' %}">Criar conta.</a>
-        <a href="{% url 'login' %}">Logar em sua conta!</a>
-        {% endif %}
-    </p>
-
+                </button>
+                <a class="navbar-brand" href="{% url 'index' %}">Lista de Tarefas</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="{% url 'topicos' %}">Ir para Tarefas</a>
+               
+                    <!-- Este href de logout_user server para ter um 
+                    btn de fechamento da sessao do usuario.-->
+                    {% if user.is_authenticated %}
+                    <p class="nav-link"> Olá, {{user.username}}. </p>
+                    
+                    <a class="nav-link" href="{% url 'logout_user' %}">Sair!</a>
+                    
+                    {% else %}
+                    <!-- Lembrando que em url é o 'name=' que está dentro de urls.py-->
+                
+                        <a class="nav-link" href="{% url 'reg_usuario' %}">Criar conta.</a>
+                    
+                        <a class="nav-link" href="{% url 'login' %}">Logar em sua conta!</a>
+                    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
 </header>
 
 <body>
