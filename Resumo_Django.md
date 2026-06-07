@@ -38,6 +38,6 @@
 1. *'python manage.py makemigrations lista_tarefas'* - ele prepara a seq de cmds para atualizar a tab. Como eu tenho tanto a tab de Topicos populada e a de User, ele não sabe qual ID de user usar para cada reg. Por isto ele pergunta se quero colocar um valor padrão ou preencher manualmente, nesta sequencia. Escolhi por colocar vlr padrão. Depois ele pedirá o valor, por exemplo, coloquei o valor 2, que é o id de GOG. Cmd tem como ultimo 'arg=nome_app'.
 2. *'python manage.py migrate'* - este executa a atualização na tab.
 
-## PAREI NA AULA 21 - no inicio
+## PAREI NA AULA 25 - no inicio
 https://www.youtube.com/watch?v=JtHOL5Z2Qhk&list=PLLVddSbilcumgeyk0z6ko5U_FYPfbRO2C&index=22
 

@@ -51,8 +51,14 @@
 </header>
 
 <body>
-
-    {% block content %} {% endblock content %}
+    <div class="container">
+        <div>
+            {% block header %} {% endblock header %}
+        </div>
+        <div>
+            {% block content %} {% endblock content %}
+        </div>
+    </div>
 
 </body>
 

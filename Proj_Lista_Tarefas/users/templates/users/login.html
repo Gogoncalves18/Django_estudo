@@ -1,15 +1,30 @@
 {% extends "lista_tarefas/base.html" %}
+<!-- Tag de contexto para carregar o bootstrap-->
+{% load django_bootstrap5 %}
+
+{% block header %}
+    <div class="p-3 mb-2 bg-dark-subtle text-dark-emphasis">Entre com sua conta de login!</div>
+{% endblock header %}
+
+
 
 {% block content %}
 
-
-<form action="{% url 'login' %}" method="post">
+<form action="{% url 'login' %}" method="post" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
+    <!-- Esta tag eu devo remover pq ela é do django para 
+     formatar o form. Usando a tag abaixo, eu uso a form do
+     bootstrap {{ form.as_p }}. Veja que eu apontei acima 
+     a class para o boot, class="form" -->
 
-    <button name="submit">Entrar</button>
-    <!-- Este processo esconde o input na html e envia o user
+    {% bootstrap_form form %}
+    
+    <!-- Abaixo eu envolvo o btn para usar uma class do bootstrap: -->
+   
+    <button type="submit" name="submit" class="btn btn-success">Entrar</button>
+     <!-- Este processo esconde o input na html e envia o user
      para a página index se tudo der certo -->
+  
     <input type="hidden" name="next" value="{% url 'index' %}" />
 
 </form>

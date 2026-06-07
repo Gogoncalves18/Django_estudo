@@ -2,10 +2,15 @@
  do arquivo base para o html -->
 {% extends "lista_tarefas/base.html" %}
 
+{% block header %}
+    <div class="p-3 mb-2 bg-success text-white">
+        <h1>Acompanhe seu aprendizado.</h1>
+    </div>
+{% endblock header %}
+
 {% block content %}
 
-<!-- Este conteúdo será jogado dentro do arquivo base -->
-<h1>Primeira página criada</h1>
-<p>Estou na minha primeira página criada peloa django.</p>
+<!-- Link para criar conta na pagina inicial -->
+<a href={% url "reg_usuario" %} >Crie uma conta</a> no grenciador de tarefas.
 
 {% endblock content %}
