@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Forma de abrir um base de html e usar ele nas paginas-->
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <p>Barra de navegação</p>
+    {% block content %} 
+    <!-- Isto aqui não aparece para os html que herdam dele -->
+    <p>Aqui teremos o conteudo fora do base</p>
+    
+    {% endblock %}
+    <p>Rodapé</p>
+    
+</body>
+</html>

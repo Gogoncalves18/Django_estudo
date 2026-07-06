@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEste</title>
-</head>
-<body>
+<!-- Assim que ficará o html que herda do base.html -->
+{% extends "base.html" %}
 
-    
-    <!-- sempre dentro de duas chaves o nome do parametro recebido pela funcao. -->
-    <h1>Lista de tarefas do Sr. {{ name_param2 }}</h1>
-    
-</body>
-</html>
+<!-- Aqui o que interessa é o que é colocando entre os dois grupos de chaves -->
+{% block title %} Lista do proprietário {% endblock %}
+
+<!-- Aqui o que interessa é o que é colocando entre os dois grupos de chaves -->
+{% block content %}
+
+<h1>Lista de tarefas do Sr. {{ name_param2 }}</h1>
+
+{% endblock %}
