@@ -9,7 +9,7 @@
 ## CMD's do DJANGO
 
 - **'python manage.py createsuperuser'** - cria um user no adm do BD.
-- **'django-admin starproject "NOME DO PROJETO" .'** - para criar um projeto, sendo que o "." após o nome serve para ajudar a fazer deploy do projeto depois de pronto.
+- **'django-admin startproject "NOME DO PROJETO" .'** - para criar um projeto, sendo que o "." após o nome serve para ajudar a fazer deploy do projeto depois de pronto.
 - **'django-admin --version'** - para validar a versão.
 - **'python manage.py migrate'** - para implementar o BD no projeto, ele olhará para o BD que está definido no settings.py na pasta dentro do projeto.
 - **'python manage.py runserver'** - inicia projeto.
@@ -38,6 +38,6 @@
 1. *'python manage.py makemigrations lista_tarefas'* - ele prepara a seq de cmds para atualizar a tab. Como eu tenho tanto a tab de Topicos populada e a de User, ele não sabe qual ID de user usar para cada reg. Por isto ele pergunta se quero colocar um valor padrão ou preencher manualmente, nesta sequencia. Escolhi por colocar vlr padrão. Depois ele pedirá o valor, por exemplo, coloquei o valor 2, que é o id de GOG. Cmd tem como ultimo 'arg=nome_app'.
 2. *'python manage.py migrate'* - este executa a atualização na tab.
 
-## PAREI NA AULA 25 - no inicio
-https://www.youtube.com/watch?v=JtHOL5Z2Qhk&list=PLLVddSbilcumgeyk0z6ko5U_FYPfbRO2C&index=22
+## PAREI NA AULA 6 - no inicio
+https://www.youtube.com/watch?v=zKHxYWIjj3U&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=6
 

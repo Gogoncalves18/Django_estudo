@@ -1,12 +1,14 @@
-<!-- Assim que ficará o html que herda do base.html -->
+
 {% extends "base.html" %}
 
-<!-- Aqui o que interessa é o que é colocando entre os dois grupos de chaves -->
 {% block title %} Lista do proprietário {% endblock %}
 
-<!-- Aqui o que interessa é o que é colocando entre os dois grupos de chaves -->
 {% block content %}
 
-<h1>Lista de tarefas do Sr. {{ name_param2 }}</h1>
+<!-- Adicao do container do bootstrap -->
+<div class="container">
+  <!-- Content here -->
+  <h1>Lista de tarefas do Sr. {{ name_param2 }}</h1>
+</div>
 
 {% endblock %}
