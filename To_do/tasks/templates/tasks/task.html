@@ -1,0 +1,16 @@
+<!-- Assim que ficará o html que herda do base.html -->
+{% extends "base.html" %}
+
+{% block title %} Lista de tarefas:: {% endblock %}
+
+{% block content %} 
+
+<div class="offset-1 col-10 list-div">
+    <!-- Para carregar o titulo -->
+    <h1>{{task_web.title}}</h1>
+    <!-- TRAZ A TAREFA APENAS COM DESCRICAO -->
+    <p>{{task_web.description}}</p>
+    
+</div>
+
+{% endblock %}
