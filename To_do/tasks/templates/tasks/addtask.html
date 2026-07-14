@@ -1,0 +1,23 @@
+<!-- Assim que ficará o html que herda do base.html -->
+{% extends "base.html" %}
+
+{% block title %} Criar tarefas: {% endblock %}
+
+{% block content %} 
+
+<div class="offset-1 col-10 list-div">
+    
+    <h1>Adicione nova tarefa:</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+        <!-- ESTE CARA PUXA OS DADOS DA VARIAVEL QUE INSTANCIAMOS EM VIEW -->
+        {{ form.as_p }}
+        <input type="submit" class='btn btn-success' value="Criar tarefa">
+
+    </form>
+    
+</div>
+
+{% endblock %}
