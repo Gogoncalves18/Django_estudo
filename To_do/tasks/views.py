@@ -45,3 +45,34 @@ def newTask(request):
         # instancio ele para jogar para o front
         form = TaskForm()
         return render(request, 'tasks/addtask.html', {'form': form})
+
+
+def editTask(request, param_id):
+    # Este "get_object_or_404" é uma fx que busca os dados da tab task com o
+    # param da PK     # se não encontrar em lança um 404.
+    task = get_object_or_404(Task, pk=param_id)
+    # Para deixar o form preenchido quando o user chamar o front
+    form = TaskForm(instance=task)
+
+    # Valido se estou executando o post na page
+    if (request.method == 'POST'):
+        # Pego os dados do form que usou o metodo post e instancio ele e junto
+        # coloco o objeto task
+        form = TaskForm(request.POST, instance=task)
+        if (form.is_valid()):
+            # Salvo os dados
+            task.save()
+            return redirect('/')
+        # Se ocorrer algum erro no form, redireciono a page original
+        else:
+            return render(request,
+                          'tasks/edittask.html',
+                          {'form': form, 'task': task})
+    # Se não tiver executando o post apenas carrego os dados do form
+    else:
+        # Aqui eu monto duas dict para o front, um com o form formatado pelo
+        # django e outro com os dados da task pois quero usar algumas
+        # infos dela para preencher no template
+        return render(request,
+                      'tasks/edittask.html',
+                      {'form': form, 'task': task})

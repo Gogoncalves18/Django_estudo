@@ -6,4 +6,5 @@ urlpatterns = [
     path('yourname/<str:name_param>', views.yourName, name='nome'),
     path('newtask/', views.newTask, name='new-task'),
     path('task/<int:param_id>', views.taskView, name="task-view"),
+    path('edit/<int:param_id>', views.editTask, name='edit-task'),
 ]

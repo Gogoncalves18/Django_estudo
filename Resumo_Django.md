@@ -39,5 +39,5 @@
 2. *'python manage.py migrate'* - este executa a atualização na tab.
 
 ## PAREI NA AULA 10 - no inicio
-https://www.youtube.com/watch?v=la_MTnWEBMM&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=10
+https://www.youtube.com/watch?v=B2WE9VcPrfI&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=12
 

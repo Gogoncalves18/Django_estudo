@@ -28,7 +28,12 @@
             <!-- AQUI CRIO O LINK DA TAREFA COM O HREF E TRAGO O NOME DO TITLE PARA TAREFA -->
             <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
             <span><i class="fas fa-trash"></i></span>
-            <span><i class="fas fa-edit"></i></span>
+            <!-- ADICIONAR TAG a COBRINDO O BTN DE EDITE PARA ACIONAR A VIEW -->
+             <a href="edit/{{task.id}}">
+
+                 <span><i class="fas fa-edit"></i></span>
+
+            </a>
         </li>
         
         {% endfor %}
