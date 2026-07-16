@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-# Importanto o ORM da tab do BD
 from .models import Task
-
-# Importacao do form
 from .forms import TaskForm
+# Para gerar mensagens no front end
+from django.contrib import messages
 
 
 def tasklist(request):
@@ -76,3 +75,15 @@ def editTask(request, param_id):
         return render(request,
                       'tasks/edittask.html',
                       {'form': form, 'task': task})
+
+
+def deleteTask(request, param_id):
+    task = get_object_or_404(Task, pk=param_id)
+    # Deletar o obj da PK encontrada, se ele encontrar pk, caso contrario 
+    # subira um 404
+    task.delete()
+    # Funcao para entregar mensagem para o front.
+    messages.info(request, 'Tarefa deletada com sucesso!')
+    messages.error(request, 'FUDEU COM TUDO!')
+
+    return redirect('/')

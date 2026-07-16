@@ -20,6 +20,34 @@
         <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar...">
         <i class="fas fa-search"></i>
     </div>
+
+    <!-- AQUI EU ABRO NO FRONT UMA CONDICIONAL PARA VALIDAR SE TENHO MSG, 
+     PROVINIENTE DO BACK END, VINDA DA VIEW COM A FUNCAO MESSAGES E O REQUEST -->
+    {% if messages %}
+
+        <!-- UDO O UL APENAS POR UMA QUESTAO DE FORMATACAO SENDO QUE O BOOTSTRAP 
+         FARA O RESTO COM A CLASS QUE EU PASSEI -->
+        <ul class='messages'>
+
+            <!-- AQUI EU ABRO UM FOR POIS POSSO TER MAIS DE UMA MENSAGEM, POIS 
+             O DJANGO MONTA UM INTERAVEL -->
+            {% for msg in messages %}
+
+                <!-- DENTRO DO LI, EM SUA FORMATACAO EU AINDA VALIDO SE HÁ 
+                 ALGUMA TAG DE MENSAGEM QUE O DJANGO MONTOU DENTRO DO INTERAVEL
+                 POIS POSSO TER DENTRO DA MESMA MENSAGEM UMA TAG DE SUCCESS, OU 
+                 ERROR, OU INFO. LEMBRANDO AINDA QUE O TREICHO 'alert alert-{{msg.tags}}'
+                 É UM CONVENCAO DO BOOTSTRAP AO QUAL APÓS O ALERT EU DEVO INFORMAR A TAG -->
+                <li {% if msg.tags %} class='alert alert-{{msg.tags}}'{% endif %} >
+                    {{msg}}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+    
+    {% endif %}
+
     <ul class="task-list">
         <!-- LOOP DO DJANGO -->
         {% for task in tasks_f %}
@@ -27,7 +55,16 @@
         <li class="task-item">
             <!-- AQUI CRIO O LINK DA TAREFA COM O HREF E TRAGO O NOME DO TITLE PARA TAREFA -->
             <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
-            <span><i class="fas fa-trash"></i></span>
+
+            <!-- ADICIONADO A TAG a PARA JOGAR O PARAM DO FRONT PARA A VIEW, 
+             LEMBRANDO QUE ESTOU DENTRO DE UM FOR. PORTANTO EU PEGO O ID DA TASK
+             E CRIO UM HIPERLINK PARA O CAMINHO AO QUAL EM URLS ESTÁ DEFINIDO QUE
+             O DJANGO CHAMARÁ A VIU E DAI PARA FRENTE OCORRER O CRUD -->
+             <a href="delete/{{ task.id }}">
+
+                 <span><i class="fas fa-trash"></i></span>
+
+             </a>
             <!-- ADICIONAR TAG a COBRINDO O BTN DE EDITE PARA ACIONAR A VIEW -->
              <a href="edit/{{task.id}}">
 
