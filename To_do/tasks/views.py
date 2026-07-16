@@ -4,9 +4,27 @@ from .forms import TaskForm
 # Para gerar mensagens no front end
 from django.contrib import messages
 
+# Importacao da paginacao para nao carregar muitos dados de uma vez
+from django.core.paginator import Paginator
+
 
 def tasklist(request):
-    tasks_field = Task.objects.all().order_by('-created_at')
+    # Troco a variavel principal da view para que o final da fx nao mude
+    task_page = Task.objects.all().order_by('-created_at')
+
+    # Os obj que foram instanciados do BD, agora serão entregues para o front
+    # de 3 em 3, a funcao me pede a instancia de todos os obj e a qtd q eu
+    # quero levar para o front
+    paginacao = Paginator(task_page, 3)
+
+    # Aqui eu uso a funcao do request para entregar um numero de pagina para 
+    # o front
+    pag = request.GET.get('page')
+
+    # Por fim entrego para a instancia que controlará o numero de obj, a 
+    # fx de numero de pagina
+    tasks_field = paginacao.get_page(pag)
+
     return render(request, 'tasks/list.html', {'tasks_f': tasks_field})
 
 

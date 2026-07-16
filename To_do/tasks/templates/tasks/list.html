@@ -76,6 +76,34 @@
         {% endfor %}
        
     </ul>
+
+    <!-- CONTROLE DE PAGINACAO -->
+    <div class='pagination'>
+
+        <!-- APENAS QUEBRO O ESPACO COM SPAN E ENTRO COM BOOTSTRAP -->
+        <span class='step-links'>
+
+            <!-- FX DO DJANGO PARA VALIDAR SE HÁ PAGINAS ANTERIORES-->
+            {% if tasks_f.has_previous %}
+                <!-- APRESENTO O NUMERO DA PAGINA ANTETIOR E COLOCO ICONE COM FONTAWESON -->
+                <a href="?page={{ tasks_f.previous_page_number }}"><i class='fas fa-arrow-left'></i></a>
+            {% endif %}
+
+            <!-- QUEBRO NOVAMENTE UM NOVO ESPACO PARA COLOCAR O NUMERO DA PAGINA QUE ESTOU
+             COM O NUMERO DE PAGINAS QUE HÁ DENTRO DO OBJ TASKS_F QUE VEIO DA VIEW -->
+            <span class='current'>
+                {{ tasks_f.number }} de {{ tasks_f.paginator.num_pages }}
+            </span>
+
+            {% if tasks_f.has_next %}
+                <a href="?page={{ tasks_f.next_page_number }}"><i class='fas fa-arrow-right'></i></a>
+            {% endif %}
+
+        </span>
+
+    </div>
+
+
 </div>
 
 {% endblock %}

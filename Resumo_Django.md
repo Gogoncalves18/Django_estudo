@@ -32,6 +32,12 @@
 12. Ajustar as rotas em urls.py
 13. Cuidar dos nomes dentro das rotas da url que irá apontar para as views
 14. Rodar 'pip install django-bootstrap5' para ele instalar a versao 5 do bootstrap
+
+## Fluxo dos parametros, urls e views
+1. No html podemos preparar um href que nos levará para um link que pode ter um ID ou qq
+outra infos.
+2. Este link se tiver mapeado nas urls acionará a view, entregando para ela request e parametro.
+3. Dentro da view eu faço o processamento e atualizo o front respondendo o request.
  
 ## Cuidados:
 ### Quando ocorre de atualizar novos campos nas tab dentro do banco. Neste caso eu precisei colocar um ID de user dentro de cada registro de topicos para que cada tópico tenha um dono:
@@ -39,5 +45,5 @@
 2. *'python manage.py migrate'* - este executa a atualização na tab.
 
 ## PAREI NA AULA 10 - no inicio
-https://www.youtube.com/watch?v=B2WE9VcPrfI&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=12
+https://www.youtube.com/watch?v=Cq-HCu165Rw&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=14
 

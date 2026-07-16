@@ -111,3 +111,21 @@ ul.messages {
 ul.messages {
     list-style: none;
 }
+
+/* PAGINACAO */
+
+.pagination {
+    margin-bottom: 20px;
+}
+
+.step-links {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+        /* este .current é referente apenas  as setas */
+.step-links .current {
+    margin-left: 20px;
+    margin-right: 20px;
+}
