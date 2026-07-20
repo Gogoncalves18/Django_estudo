@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Adicionei um novo app crispy para facilitar o visual dos forms do django
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tasks',
     'about',
     'users',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Necessario colocar esta constante no django para o crispy funcionar
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -17,8 +17,19 @@
 
     </a>
     <div class="col-9 search-div">
-        <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar...">
-        <i class="fas fa-search"></i>
+        <!-- NESTE CASO PARA FAZER UM SISTEMA DE BUSCA EU PRECISO ENVOLVER
+         A TAG EM UM FORM. Não preciso colocar o action pois não terei JS -->
+         <form method="get" id="search-form">
+             
+            <div class="search-box">
+                <!-- Este valor value="{{ request.GET.search }} serve para o que eu escrever
+                 no btn search, ele permanece quando eu clico em pesquisar na lupa -->
+                <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar..." value="{{ request.GET.search }}">
+                <button type="submit" id="search-btn" aria-label="Pesquisar">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
     </div>
 
     <!-- AQUI EU ABRO NO FRONT UMA CONDICIONAL PARA VALIDAR SE TENHO MSG, 
@@ -91,9 +102,17 @@
 
             <!-- QUEBRO NOVAMENTE UM NOVO ESPACO PARA COLOCAR O NUMERO DA PAGINA QUE ESTOU
              COM O NUMERO DE PAGINAS QUE HÁ DENTRO DO OBJ TASKS_F QUE VEIO DA VIEW -->
-            <span class='current'>
-                {{ tasks_f.number }} de {{ tasks_f.paginator.num_pages }}
-            </span>
+
+            <!-- INSIRO ESTE IF DO DJANGO PARA CONTROLAR O QUE MOSTRAREI 
+             QUANDO NÃO TEM PAGINAÇÃO COMO É O CASO DO SEARCH --> 
+            
+            {% if tasks_f.paginator.num_pages %}
+            
+                <span class='current'>
+                    {{ tasks_f.number }} de {{ tasks_f.paginator.num_pages }}
+                </span>
+
+            {% endif %} 
 
             {% if tasks_f.has_next %}
                 <a href="?page={{ tasks_f.next_page_number }}"><i class='fas fa-arrow-right'></i></a>
