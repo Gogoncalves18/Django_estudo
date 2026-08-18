@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+# USO DE UM CONTROLADOR DE ACESSO VIA LOGIN USER DO DJANGO PARA NAO VER TASK
+from django.contrib.auth.decorators import login_required
 from .models import Task
 from .forms import TaskForm
 # Para gerar mensagens no front end
@@ -7,7 +9,11 @@ from django.contrib import messages
 # Importacao da paginacao para nao carregar muitos dados de uma vez
 from django.core.paginator import Paginator
 
+# DECORATOR DO DJANGO PARA DEFINIR QUEM TERÁ ACESSO AS INFOS DA VIEW
+# NESTE CASO TEMOS ISTO DO django.contrib.auth.decorators
 
+
+@login_required
 def tasklist(request):
 
     # Este get do request recebe a variavel do input do form que está
@@ -41,10 +47,12 @@ def tasklist(request):
     return render(request, 'tasks/list.html', {'tasks_f': tasks_field})
 
 
+@login_required
 def yourName(request, name_param):
     return render(request, 'tasks/yourname.html', {'name_param2': name_param})
 
 
+@login_required
 def taskView(request, param_id):
     # Este "get_object_or_404" é uma fx que busca os dados da tab task com o
     # param da PK     # se não encontrar em lança um 404.
@@ -53,6 +61,7 @@ def taskView(request, param_id):
     return render(request, 'tasks/task.html', {'task_web': task})
 
 
+@login_required
 def newTask(request):
     # Este if verifica que estou fazendo um post em minha page
     if request.method == 'POST':
@@ -77,6 +86,7 @@ def newTask(request):
         return render(request, 'tasks/addtask.html', {'form': form})
 
 
+@login_required
 def editTask(request, param_id):
     # Este "get_object_or_404" é uma fx que busca os dados da tab task com o
     # param da PK     # se não encontrar em lança um 404.
@@ -108,6 +118,7 @@ def editTask(request, param_id):
                       {'form': form, 'task': task})
 
 
+@login_required
 def deleteTask(request, param_id):
     task = get_object_or_404(Task, pk=param_id)
     # Deletar o obj da PK encontrada, se ele encontrar pk, caso contrario 

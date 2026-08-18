@@ -19,5 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('tasks.urls'))
+    path('', include('tasks.urls')),
+    # Carregamento do módulo do django para autenticacao
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

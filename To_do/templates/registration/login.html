@@ -1,0 +1,29 @@
+<!-- Assim que ficará o html que herda do base.html -->
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Entrar no TO DO List {% endblock %}
+
+{% block content %} 
+
+<div class="row">
+    <div class="col-md-4 offset-med-4">
+        <div class="card auth-card">
+            <div class="card-body">
+                <h4 class="car-title text-center"> Entrar no TO DO List</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <!-- NAO CONSEGUI USAR O CRISPYFORM NESTE CASO -->
+                    {{ form.as_p  }}
+                    <button type="submit" class="btn btn-primary btn-block">Entrar
+                        
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

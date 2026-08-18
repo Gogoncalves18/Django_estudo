@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -55,10 +56,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'todo.urls'
 
+# Em DIRS eu posso direcionar para ele onde estará os templates do projeto
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +124,9 @@ STATIC_URL = 'static/'
 
 # Necessario colocar esta constante no django para o crispy funcionar
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Constantes para redirecionar o user quando ele faz login ou logout
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/accounts/login'

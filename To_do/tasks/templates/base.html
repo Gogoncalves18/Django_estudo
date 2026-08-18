@@ -31,15 +31,36 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- VALIDACAO SE O USER ESTA AUTENTICADO -->
+        {% if user.is_authenticated %}
+         <li class="nav-item">
+           <a class="nav-link active" aria-current="page" href="/">Tarefas</a>
+          </li>               
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Usuários</a>
+          </li>    
+        {% else %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Tarefas</a>
-        </li>               
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Usuários</a>
-        </li>               
+          <a class="nav-link active" aria-current="page" href="/accounts/login">Entrar</a>
+        </li>                 
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Sobre nós</a>
-        </li>               
+        </li>
+
+        <!-- ESTA PARTE DO CODE É MUITO IMPORTANTE PARA CONSEGUIR VOLTAR AO 
+         LINK DE LOGIN, O DJANDO MUDOU NAS ULTIMAS VERSOES, DEIXANDO DE USAR O METHOD GET-->
+        {% if user.is_authenticated %}
+         <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="nav-link active border-0 bg-transparent">
+              Sair
+              </button>
+            </form>
+          </li>
+        {% endif %}                 
       </ul>      
     </div>
   </div>
