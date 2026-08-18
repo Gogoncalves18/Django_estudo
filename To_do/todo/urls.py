@@ -20,6 +20,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tasks.urls')),
+    # Gero uma nova url para servir um novo app de accounts para registro
+    # de user, com include ele irá para dentro do app accounts e buscará o
+    # urls.py
+    path('accounts/', include('accounts.urls')),
     # Carregamento do módulo do django para autenticacao
     path('accounts/', include('django.contrib.auth.urls')),
 ]

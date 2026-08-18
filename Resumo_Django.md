@@ -45,7 +45,7 @@ outra infos.
 2. *'python manage.py migrate'* - este executa a atualização na tab.
 
 ## PAREI NA AULA 10 - no inicio
-https://www.youtube.com/watch?v=o19Eki_7UqY&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=16
+https://www.youtube.com/watch?v=pu9Y0sMlPfQ&list=PLnDvRpP8BnewqnMzRnBT5LeTpld5bMvsj&index=17
 
 
 necessario ver sobre o crispy
