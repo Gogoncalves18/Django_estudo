@@ -23,11 +23,14 @@ def tasklist(request):
     # Valido se há algo em search
     if search:
         # O title__icontains= ignora o case_sensetive do texto
-        tasks_field = Task.objects.filter(title__icontains=search)
+        # 'USER=REQUEST.USER' FORNECE A VIEW O USER Q ESTÁ AUTENTICADO
+        # NO DJANGO
+        tasks_field = Task.objects.filter(title__icontains=search, 
+                                          user=request.user)
     else:
 
         # Troco a variavel principal da view para que o final da fx nao mude
-        task_page = Task.objects.all().order_by('-created_at')
+        task_page = Task.objects.all().order_by('-created_at').filter(user=request.user)
 
         # Os obj que foram instanciados do BD, agora serão entregues para o
         # front
@@ -76,6 +79,7 @@ def newTask(request):
             task = form.save(commit=False)
             # Altero o campo done que está dentro do objeto instanciado
             task.done = 'doing'
+            task.user = request.user
             # Então salvo
             task.save()
             # Ai direciono ele para um determinado caminho
