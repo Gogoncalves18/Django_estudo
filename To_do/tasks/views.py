@@ -133,3 +133,17 @@ def deleteTask(request, param_id):
     messages.error(request, 'FUDEU COM TUDO!')
 
     return redirect('/')
+
+
+@login_required
+def changeStatus(request, param_id):
+    task = get_object_or_404(Task, pk=param_id)
+
+    if (task.done == 'doing'):
+        task.done = 'done'
+    else:
+        task.done = 'doing'
+
+    task.save()
+
+    return redirect('/')

@@ -63,26 +63,43 @@
         <!-- LOOP DO DJANGO -->
         {% for task in tasks_f %}
 
-        <li class="task-item">
-            <!-- AQUI CRIO O LINK DA TAREFA COM O HREF E TRAGO O NOME DO TITLE PARA TAREFA -->
-            <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
+        <!-- ESTE IF É APENAS PARA FILTRAR AS LISTA COM ITENS QUE TEM
+         DONE NOS ATRIBUTOS, ASSIM MUDO O COMPORTAMENTO DO FRONT -->
+        {% if task.done == 'doing' %}
 
-            <!-- ADICIONADO A TAG a PARA JOGAR O PARAM DO FRONT PARA A VIEW, 
-             LEMBRANDO QUE ESTOU DENTRO DE UM FOR. PORTANTO EU PEGO O ID DA TASK
-             E CRIO UM HIPERLINK PARA O CAMINHO AO QUAL EM URLS ESTÁ DEFINIDO QUE
-             O DJANGO CHAMARÁ A VIU E DAI PARA FRENTE OCORRER O CRUD -->
-             <a href="delete/{{ task.id }}">
+            <!-- AQUI ITENS COM DOING -->
+            <li class="task-item done">
 
-                 <span><i class="fas fa-trash"></i></span>
+        {% else %}
 
-             </a>
-            <!-- ADICIONAR TAG a COBRINDO O BTN DE EDITE PARA ACIONAR A VIEW -->
-             <a href="edit/{{task.id}}">
+            <!-- AQUI ITENS QUE JÁ POSSUI DONE NOS ATRIBUTOS -->
+            <li class="task-item">
 
-                 <span><i class="fas fa-edit"></i></span>
+        {% endif %}
+                <!-- AQUI CRIO O LINK DA TAREFA COM O HREF E TRAGO O NOME DO TITLE PARA TAREFA -->
+                <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
 
-            </a>
-        </li>
+                <!-- ADICIONADO A TAG a PARA JOGAR O PARAM DO FRONT PARA A VIEW, 
+                LEMBRANDO QUE ESTOU DENTRO DE UM FOR. PORTANTO EU PEGO O ID DA TASK
+                E CRIO UM HIPERLINK PARA O CAMINHO AO QUAL EM URLS ESTÁ DEFINIDO QUE
+                O DJANGO CHAMARÁ A VIU E DAI PARA FRENTE OCORRER O CRUD -->
+                <a href="delete/{{ task.id }}">
+
+                    <span><i class="fas fa-trash"></i></span>
+
+                </a>
+
+                <!-- ADICIONAR TAG a COBRINDO O BTN DE EDITE PARA ACIONAR A VIEW -->
+                <a href="edit/{{task.id}}">
+                    <span><i class="fas fa-edit"></i></span>
+                </a>
+                
+                <!-- ADICIONAR TAG a COBRINDO O BTN PARA MUDAR O STATUS DA TASK -->
+                <a href="changestatus/{{task.id}}">
+                    <span><i class="fas fa-check"></i></span>
+                </a>
+
+            </li>
         
         {% endfor %}
        

@@ -169,6 +169,7 @@
     border-bottom: 1px dashed #CCC;
 }
 
+/* É ASSIM QUE É REPRESENTADO UMA CLASSE DO HTML QUE POSSUI UM ATTR COM "done" */
 .task-item.done {
     background-color: #CCC;
 }  
