@@ -8,6 +8,7 @@ from django.contrib import messages
 
 # Importacao da paginacao para nao carregar muitos dados de uma vez
 from django.core.paginator import Paginator
+import datetime
 
 # DECORATOR DO DJANGO PARA DEFINIR QUEM TERÁ ACESSO AS INFOS DA VIEW
 # NESTE CASO TEMOS ISTO DO django.contrib.auth.decorators
@@ -22,6 +23,12 @@ def tasklist(request):
 
     # ESTOU RECEBENDO DO JS UM VAR COM NOME filter
     filterjs = request.GET.get('filter')
+
+    # CONTAGEM DAS TAREFAS PARA SEREM CARREGADAS NO FRONT EM DASHBOARDS DO list.html
+    tasksDoneRecently = Task.objects.filter(done='done',
+                                            updated_at__gt=datetime.datetime.now()-datetime.timedelta(days=30), user=request.user).count()
+    tasksDone = Task.objects.filter(done='done', user=request.user).count()
+    tasksDoing = Task.objects.filter(done='doing', user=request.user).count()
 
     # Valido se há algo em search
     if search:
@@ -56,7 +63,9 @@ def tasklist(request):
         # fx de numero de pagina
         tasks_field = paginacao.get_page(pag)
 
-    return render(request, 'tasks/list.html', {'tasks_f': tasks_field})
+    # ADICIONADO AS VARS QUE CONTAM AS TAREFAS PARA O DASHBOARD
+    return render(request, 'tasks/list.html', {'tasks_f': tasks_field, 'tasksDoneRecently': tasksDoneRecently,
+                                               'tasksDone': tasksDone, 'tasksDoing': tasksDoing})
 
 
 @login_required

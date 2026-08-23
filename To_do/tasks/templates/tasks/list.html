@@ -7,6 +7,28 @@
 
 <div class="offset-1 col-10 list-div">
     <h1>Lista de Tarefas</h1>
+
+    <!-- ESPAÇO PARA O DASHBOARD DE INFOS -->
+     <div class="container dashboard">
+
+        <div class="col-4 dashboard-box" id="dashboard-lastdays">
+            <h4>Finalizado nos últimos 30 dias</h4>
+            <span>{{ tasksDoneRecently }}</span>
+        </div>
+
+        <div class="col-4 dashboard-box" id="dashboard-done">
+            <h4>Tarefas finalizas</h4>
+            <span>{{ tasksDone }}</span>
+        </div>
+
+        <div class="col-4 dashboard-box" id="dashboard-doing">
+            <h4>Tarefas para fazer</h4>
+            <span>{{ tasksDoing }}</span>
+        </div>
+
+     </div>
+
+
     <!-- ENCOBRIR O BTN DE ADICIONAR TAREFA COM A ROTA PARA CRIAR TASK
      lá do urls.py -->
     <a id='add-link' href="newtask/">
