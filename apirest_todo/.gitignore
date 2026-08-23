@@ -1,0 +1,116 @@
+# =========================
+# PYTHON
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribuição / build
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Logs
+*.log
+
+# Testes / cobertura
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+
+# =========================
+# DJANGO
+# =========================
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+
+# Migrations (opcional - geralmente NÃO ignorar em projetos reais)
+# */migrations/*
+# !*/migrations/__init__.py
+
+# Arquivos de mídia (uploads)
+media/
+
+# Arquivos estáticos coletados
+staticfiles/
+
+# =========================
+# AMBIENTE VIRTUAL
+# =========================
+venv/
+env/
+ENV/
+.venv/
+
+# =========================
+# CONFIGURAÇÕES SENSÍVEIS
+# =========================
+.env
+.env.*
+*.env
+*.ini
+*.cfg
+
+# Django secret settings (separados)
+local_settings.py
+settings_local.py
+
+# =========================
+# BANCO DE DADOS
+# =========================
+*.sqlite3
+*.db
+
+# PostgreSQL dumps
+*.sql
+
+# =========================
+# IDEs / EDITORES
+# =========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# =========================
+# SISTEMA OPERACIONAL
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# ARQUIVOS TEMPORÁRIOS
+# =========================
+*.swp
+*.tmp
+*.bak
+*~
+
+# =========================
+# DOCKER (se usar)
+# =========================
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# NODE (caso use frontend)
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# OUTROS
+# =========================
+coverage.xml
+*.cover
