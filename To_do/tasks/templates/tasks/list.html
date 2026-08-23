@@ -32,6 +32,19 @@
         </form>
     </div>
 
+    <!-- BTN PARA PESQUISA -->
+
+    <div class="col-12 filter-div">
+        <span>Filtrar por:</span>
+        <!-- ESTA PARTE SERÁ CONTROLADA POR JS, PORTANTO NÃO ENTRARÁ FORM AQUI -->
+        <select name="filter" id="filter" class="form-control">
+            <option value="">Escolha uma opção:</option>
+            <option value="done">Tarefas concluídas.</option>
+            <option value="doing">Tarefas por fazer.</option>
+
+        </select>
+    </div>
+
     <!-- AQUI EU ABRO NO FRONT UMA CONDICIONAL PARA VALIDAR SE TENHO MSG, 
      PROVINIENTE DO BACK END, VINDA DA VIEW COM A FUNCAO MESSAGES E O REQUEST -->
     {% if messages %}

@@ -20,12 +20,21 @@ def tasklist(request):
     # no list.html que tem o name='search'
     search = request.GET.get('search')
 
+    # ESTOU RECEBENDO DO JS UM VAR COM NOME filter
+    filterjs = request.GET.get('filter')
+
     # Valido se há algo em search
     if search:
         # O title__icontains= ignora o case_sensetive do texto
         # 'USER=REQUEST.USER' FORNECE A VIEW O USER Q ESTÁ AUTENTICADO
         # NO DJANGO
         tasks_field = Task.objects.filter(title__icontains=search, 
+                                          user=request.user)
+
+    # NESTE CASO FAÇO MAIS UM IF PARA PEGAR AS TAREFAS QUE ESTÃO COM DONE
+    # PROVENIENTE DO JS EM filterjs
+    elif filterjs:
+        tasks_field = Task.objects.filter(done=filterjs,
                                           user=request.user)
     else:
 
